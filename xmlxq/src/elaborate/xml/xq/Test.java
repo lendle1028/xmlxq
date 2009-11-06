@@ -17,12 +17,12 @@ import org.w3c.dom.Document;
  */
 public class Test {
     public static void main(String [] args) throws Exception{
-        DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+        final DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
-        DocumentBuilder db=dbf.newDocumentBuilder();
-        Document doc=db.parse(new File("Group.xsd"));
+        final DocumentBuilder db=dbf.newDocumentBuilder();
+        final Document doc=db.parse(new File("Group.xsd"));
 
-        XQ xNode=new XQ(doc.getDocumentElement());
+        final XQ xNode=new XQ(doc.getDocumentElement());
         System.out.println(xNode.getFirstChildElement().getQName());
         System.out.println(xNode.getFirstChildElement().getNextNode().getQName());
         System.out.println(xNode.getFirstChildElement().getNextElementNode().getQName());
@@ -45,7 +45,7 @@ public class Test {
         System.out.println(xNode.findElementsByTextValue("456").get(0));
         System.out.println(xNode.findElementsByAttributeValue("minOccurs", "2"));
 
-        XQ xq2=new XQ("<xml><a><a1>a1</a1></a><b><b1>b1</b1></b></xml>");
+        final XQ xq2=new XQ("<xml><a><a1>a1</a1></a><b><b1>b1</b1></b></xml>");
         System.out.println(xq2);
         System.out.println(xq2.findElementsByNodeName("a1").get(0).getValue());
     }

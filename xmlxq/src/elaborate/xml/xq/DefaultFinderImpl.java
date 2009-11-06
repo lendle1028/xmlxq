@@ -26,18 +26,18 @@ import org.w3c.dom.NodeList;
 public class DefaultFinderImpl implements Finder{
 
     public List<Node> findByNodeName(Node contextNode, String tagName) {
-        List<Element> elements=this.findElementsByNodeName(contextNode, tagName);
-        List<Attr> attrs=this.findAttributesByNodeName(contextNode, tagName);
-        List<Node> ret=new ArrayList<Node>(elements.size()+attrs.size());
+        final List<Element> elements=this.findElementsByNodeName(contextNode, tagName);
+        final List<Attr> attrs=this.findAttributesByNodeName(contextNode, tagName);
+        final List<Node> ret=new ArrayList<Node>(elements.size()+attrs.size());
         ret.addAll(elements);
         ret.addAll(attrs);
         return ret;
     }
 
     public List<Node> findByNodeName(Node contextNode, QName qName) {
-        List<Element> elements=this.findElementsByNodeName(contextNode, qName);
-        List<Attr> attrs=this.findAttributesByNodeName(contextNode, qName);
-        List<Node> ret=new ArrayList<Node>(elements.size()+attrs.size());
+        final List<Element> elements=this.findElementsByNodeName(contextNode, qName);
+        final List<Attr> attrs=this.findAttributesByNodeName(contextNode, qName);
+        final List<Node> ret=new ArrayList<Node>(elements.size()+attrs.size());
         ret.addAll(elements);
         ret.addAll(attrs);
         return ret;
@@ -143,7 +143,7 @@ public class DefaultFinderImpl implements Finder{
     }
 
     public List<Node> evaluateAsNodeList(Node contextNode, String xpath) throws XPathExpressionException{
-        NodeList nodeList=(NodeList) this.evaluateXPath(contextNode, xpath, XPathConstants.NODESET);
+        final NodeList nodeList=(NodeList) this.evaluateXPath(contextNode, xpath, XPathConstants.NODESET);
         return CommonUtil.nodeList2List(nodeList);
     }
 
@@ -155,8 +155,8 @@ public class DefaultFinderImpl implements Finder{
         if(contextNode==null){
             return null;
         }
-        XPathFactory factory=XPathFactory.newInstance();
-        XPath _xpath=factory.newXPath();
+        final XPathFactory factory=XPathFactory.newInstance();
+        final XPath _xpath=factory.newXPath();
         return _xpath.evaluate(xpath, contextNode, returnType);
     }
     /**
@@ -169,7 +169,7 @@ public class DefaultFinderImpl implements Finder{
         if(nodes==null){
             return new ArrayList<Element>();
         }
-        List<Element> elements=new ArrayList<Element>(nodes.size());
+        final List<Element> elements=new ArrayList<Element>(nodes.size());
         for(Node node : nodes){
             if(node.getNodeType()==Node.ELEMENT_NODE){
                 elements.add((Element)node);
@@ -188,7 +188,7 @@ public class DefaultFinderImpl implements Finder{
         if(nodes==null){
             return new ArrayList<Attr>();
         }
-        List<Attr> attrs=new ArrayList<Attr>(nodes.size());
+        final List<Attr> attrs=new ArrayList<Attr>(nodes.size());
         for(Node node : nodes){
             if(node.getNodeType()==Node.ATTRIBUTE_NODE){
                 attrs.add((Attr)node);
