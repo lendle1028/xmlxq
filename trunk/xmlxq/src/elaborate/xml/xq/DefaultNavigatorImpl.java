@@ -82,8 +82,8 @@ public class DefaultNavigatorImpl implements Navigator{
         if(contextNode.getNodeType()!=Node.ELEMENT_NODE){
             return new ArrayList<Attr>();
         }
-        NamedNodeMap map=contextNode.getAttributes();
-        List<Attr> attrs=new ArrayList<Attr>();
+        final NamedNodeMap map=contextNode.getAttributes();
+        final List<Attr> attrs=new ArrayList<Attr>();
         for(int i=0; map!=null && i<map.getLength(); i++){
             attrs.add((Attr)map.item(i));
         }

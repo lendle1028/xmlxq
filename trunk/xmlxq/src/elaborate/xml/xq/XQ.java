@@ -90,7 +90,7 @@ public class XQ {
     }
 
     private void init(String xml) throws Exception{
-        StringReader reader=new StringReader(xml);
+        final StringReader reader=new StringReader(xml);
         try{
             this.init(reader);
         }finally{
@@ -101,7 +101,7 @@ public class XQ {
     }
 
     private void init(URL url, String encoding) throws Exception{
-        InputStream input=url.openStream();
+        final InputStream input=url.openStream();
         try{
             this.init(input, encoding);
         }finally{
@@ -112,7 +112,7 @@ public class XQ {
     }
 
     private void init(File file, String encoding) throws Exception{
-        InputStream input=new FileInputStream(file);
+        final InputStream input=new FileInputStream(file);
         try{
             this.init(input, encoding);
         }finally{
@@ -127,9 +127,9 @@ public class XQ {
     }
 
     private void init(Reader reader) throws Exception{
-        DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+        final DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
-        DocumentBuilder db=dbf.newDocumentBuilder();
+        final DocumentBuilder db=dbf.newDocumentBuilder();
 
         this.init(db.parse(new InputSource(reader)).getDocumentElement(), new DefaultNavigatorImpl(), new DefaultManipulatorImpl(), new DefaultFinderImpl());
     }
@@ -226,11 +226,11 @@ public class XQ {
     }
 
     public QName getQName(){
-        if(this.domNode.getNamespaceURI()!=null){
-            return new QName(this.domNode.getNamespaceURI(), this.domNode.getLocalName());
+        if(this.domNode.getNamespaceURI()==null){
+            return new QName(this.domNode.getNodeName());
         }
         else{
-            return new QName(this.domNode.getNodeName());
+            return new QName(this.domNode.getNamespaceURI(), this.domNode.getLocalName());
         }
     }
 
@@ -544,6 +544,7 @@ public class XQ {
      * output the node as an string in xml format
      * @return
      */
+    @Override
     public String toString(){
         return this.manipulator.toString(domNode);
     }
@@ -556,7 +557,7 @@ public class XQ {
     }
 
     private static List<XQ> convert(List<? extends Node> nodes){
-        List<XQ> newList=new ArrayList<XQ>(nodes.size());
+        final List<XQ> newList=new ArrayList<XQ>(nodes.size());
         for(Node node : nodes){
             newList.add(convert(node));
         }

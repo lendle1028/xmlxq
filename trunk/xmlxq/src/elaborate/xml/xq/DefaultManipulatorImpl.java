@@ -38,7 +38,9 @@ public class DefaultManipulatorImpl implements Manipulator{
         else if(contextNode.getNodeType()==Node.ELEMENT_NODE){
             return ((Text)contextNode).getNodeValue();
         }
-        else return null;
+        else{
+            return null;
+        }
     }
 
     public void setValue(Node contextNode, String value) {
@@ -54,7 +56,9 @@ public class DefaultManipulatorImpl implements Manipulator{
         else if(contextNode.getNodeType()==Node.ELEMENT_NODE){
             ((Text)contextNode).setNodeValue(value);
         }
-        else return;
+        else{
+            return;
+        }
     }
 
     public String getAttributeValue(Element element, String attribute) {
@@ -73,7 +77,7 @@ public class DefaultManipulatorImpl implements Manipulator{
         element.setAttributeNS(attrQName.getNamespaceURI(), attrQName.getLocalPart(), value);
     }
 
-    public String toString(Node contextNode) {
+    public String toString(final Node contextNode) {
         if(contextNode==null){
             return null;
         }

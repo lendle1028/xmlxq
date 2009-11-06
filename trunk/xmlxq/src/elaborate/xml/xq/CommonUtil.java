@@ -16,7 +16,7 @@ import org.w3c.dom.NodeList;
  */
 public class CommonUtil {
     public static List<Node> nodeList2List(NodeList nodeList){
-        List<Node> nodes=new ArrayList<Node>();
+        final List<Node> nodes=new ArrayList<Node>();
         for(int i=0; nodeList!=null && i<nodeList.getLength(); i++){
             nodes.add(nodeList.item(i));
         }
