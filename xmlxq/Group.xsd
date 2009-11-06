@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by lendle (EMBRACE) -->
+<xsd:schema xmlns="http://humantask.flowgem.org/Group" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pq="http://humantask.flowgem.org/PeopleQuery" targetNamespace="http://humantask.flowgem.org/Group" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://humantask.flowgem.org/PeopleQuery" schemaLocation="PeopleQuery.xsd"/>
+	<xsd:element name="group" type="Group">123<a>456</a>789</xsd:element>
+	<xsd:complexType name="Group">
+		<xsd:choice>
+			<xsd:element name="intersect">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="group" type="Group" minOccurs="2" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="union">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="group" type="Group" minOccurs="2" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="exclude">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="group" type="Group" minOccurs="2" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="user" type="pq:tUser" maxOccurs="unbounded"/>
+			<xsd:element name="expression" type="xsd:string"/>
+			<xsd:element name="query" type="pq:Query"/>
+			<!--xsd:element name="userList">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="loginId" type="xsd:string"/>
+                                    <xsd:element name="name" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                    <xsd:attribute name="organizationId" type="xsd:string"/>
+                </xsd:complexType>
+            </xsd:element-->
+		</xsd:choice>
+		<xsd:attribute name="expressionLanguage" type="xsd:anyURI"/>
+		<xsd:attribute name="groupId" type="xsd:ID" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>
