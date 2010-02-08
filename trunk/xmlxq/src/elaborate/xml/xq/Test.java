@@ -45,8 +45,12 @@ public class Test {
         System.out.println(xNode.findElementsByTextValue("456").get(0));
         System.out.println(xNode.findElementsByAttributeValue("minOccurs", "2"));
 
+        System.out.println(xNode.findElementsByAttributeValue("name", "Group").get(0).findElementsByTextValue("456").get(0));
+
         final XQ xq2=new XQ("<xml><a><a1>a1</a1></a><b><b1>b1</b1></b></xml>");
         System.out.println(xq2);
         System.out.println(xq2.findElementsByNodeName("a1").get(0).getValue());
+
+        System.out.println(xNode.findElementsByAttributeValue("name", "Group").get(0).findElementsByAttributeValue("name", "union"));
     }
 }

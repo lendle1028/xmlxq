@@ -46,7 +46,7 @@ public class DefaultFinderImpl implements Finder{
     public List<Element> findElementsByNodeName(Node contextNode, String tagName) {
         try {
             return this.convert2ElementList(
-                    this.evaluateAsNodeList(contextNode, "//*[local-name()='"+tagName+"']"));
+                    this.evaluateAsNodeList(contextNode, "descendant-or-self::*[local-name()='"+tagName+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }
@@ -59,7 +59,7 @@ public class DefaultFinderImpl implements Finder{
                 return this.findElementsByNodeName(contextNode, qName.getLocalPart());
             }
             return this.convert2ElementList(
-                    this.evaluateAsNodeList(contextNode, "//*[namespace-uri()='"+qName.getNamespaceURI()+"' and local-name()='"+qName.getLocalPart()+"']"));
+                    this.evaluateAsNodeList(contextNode, "descendant-or-self::*[namespace-uri()='"+qName.getNamespaceURI()+"' and local-name()='"+qName.getLocalPart()+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }
@@ -69,7 +69,7 @@ public class DefaultFinderImpl implements Finder{
         try {
 
             return this.convert2AttributeList(
-                    this.evaluateAsNodeList(contextNode, "//@*[local-name()='"+tagName+"']"));
+                    this.evaluateAsNodeList(contextNode, "descendant-or-self::@*[local-name()='"+tagName+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Attr>();
         }
@@ -82,7 +82,7 @@ public class DefaultFinderImpl implements Finder{
                 return this.findAttributesByNodeName(contextNode, qName.getLocalPart());
             }
             return this.convert2AttributeList(
-                    this.evaluateAsNodeList(contextNode, "//@*[namespace-uri()='"+qName.getNamespaceURI()+"' and local-name()='"+qName.getLocalPart()+"']"));
+                    this.evaluateAsNodeList(contextNode, "descendant-or-self::@*[namespace-uri()='"+qName.getNamespaceURI()+"' and local-name()='"+qName.getLocalPart()+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Attr>();
         }
@@ -91,7 +91,8 @@ public class DefaultFinderImpl implements Finder{
     public List<Element> findElementsByAttributeValue(Node contextNode, String attributeName, String attributeValue) {
         try {
             return this.convert2ElementList(
-                    this.evaluateAsNodeList(contextNode, "//*[@*[local-name()='" + attributeName + "']='"+attributeValue+"']"));
+                    this.evaluateAsNodeList(contextNode, "descendant-or-self::*[@" + attributeName + "='"+attributeValue+"']")
+                    /*this.evaluateAsNodeList(contextNode, "*//*[@*[local-name()='" + attributeName + "']='"+attributeValue+"']")*/);
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }
@@ -103,7 +104,7 @@ public class DefaultFinderImpl implements Finder{
                 //for null namespace-uri, omit the namespace-uri part
                 return this.findElementsByAttributeValue(contextNode, attributeName.getLocalPart(), attributeValue);
             }
-            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "//*[@*[namespace-uri()='" +
+            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "descendant-or-self::*[@*[namespace-uri()='" +
                     attributeName.getNamespaceURI() + "' and local-name()='" + attributeName.getLocalPart() + "']='"+attributeValue+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
@@ -112,7 +113,7 @@ public class DefaultFinderImpl implements Finder{
 
     public List<Element> findElementsByAttribute(Node contextNode, String attributeName) {
         try {
-            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "//*[@*[local-name()='" + attributeName + "']]"));
+            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "descendant-or-self::*[@*[local-name()='" + attributeName + "']]"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }
@@ -124,7 +125,7 @@ public class DefaultFinderImpl implements Finder{
                 //for null namespace-uri, omit the namespace-uri part
                 return this.findElementsByAttribute(contextNode, attributeName.getLocalPart());
             }
-            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "//*[@*[namespace-uri()='" + attributeName.getNamespaceURI() + "' and local-name()='" + attributeName.getLocalPart() + "']]"));
+            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "descendant-or-self::*[@*[namespace-uri()='" + attributeName.getNamespaceURI() + "' and local-name()='" + attributeName.getLocalPart() + "']]"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }
@@ -132,7 +133,7 @@ public class DefaultFinderImpl implements Finder{
 
     public List<Element> findElementsByTextValue(Node contextNode, String value){
         try {
-            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "//*[text()='"+value+"']"));
+            return this.convert2ElementList(this.evaluateAsNodeList(contextNode, "descendant-or-self::*[text()='"+value+"']"));
         } catch (XPathExpressionException ex) {
             return new ArrayList<Element>();
         }

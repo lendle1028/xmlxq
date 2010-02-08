@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by lendle (EMBRACE) -->
 <xsd:schema xmlns="http://humantask.flowgem.org/Group" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pq="http://humantask.flowgem.org/PeopleQuery" targetNamespace="http://humantask.flowgem.org/Group" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xsd:import namespace="http://humantask.flowgem.org/PeopleQuery" schemaLocation="PeopleQuery.xsd"/>
-	<xsd:element name="group" type="Group">123<a>456</a>789</xsd:element>
+	<xsd:import name="union" namespace="http://humantask.flowgem.org/PeopleQuery" schemaLocation="PeopleQuery.xsd"/>
+	<xsd:element name="group" type="Group">123<a>456</a>789<a>456</a></xsd:element>
 	<xsd:complexType name="Group">
 		<xsd:choice>
+                        <a id="123">456</a>
 			<xsd:element name="intersect">
 				<xsd:complexType>
 					<xsd:sequence>
